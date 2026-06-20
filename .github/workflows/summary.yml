@@ -4,6 +4,10 @@ on:
   issues:
     types: [opened]
 
+concurrency:
+  group: issue-summary-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
 jobs:
   summary:
     runs-on: ubuntu-latest
@@ -27,6 +31,7 @@ jobs:
             Body: ${{ github.event.issue.body }}
 
       - name: Comment with AI summary
+        if: success() && steps.inference.outputs.response != ''
         run: |
           gh issue comment $ISSUE_NUMBER --body "$RESPONSE"
         env:
