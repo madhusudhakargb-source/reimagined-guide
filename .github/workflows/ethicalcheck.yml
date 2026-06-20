@@ -5,7 +5,7 @@
 
 # EthicalCheck addresses the critical need to continuously security test APIs in development and in production.
 
-# EthicalCheck provides the industry’s only free & automated API security testing service that uncovers security vulnerabilities using OWASP API list.
+# EthicalCheck provides the industry's only free & automated API security testing service that uncovers security vulnerabilities using OWASP API list.
 # Developers relies on EthicalCheck to evaluate every update and release, ensuring that no APIs go to production with exploitable vulnerabilities.
 
 # You develop the application and API, we bring complete and continuous security testing to you, accelerating development.
@@ -17,7 +17,7 @@
 # 1. Security Testing.
 # Provide your OpenAPI specification or start with a public Postman collection URL.
 # EthicalCheck instantly instrospects your API and creates a map of API endpoints for security testing.
-# It then automatically creates hundreds of security tests that are non-intrusive to comprehensively and completely test for authentication, authorizations, and OWASP bugs your API. The tests addresses the OWASP API Security categories including OAuth 2.0, JWT, Rate Limit etc.
+# It then automatically creates hundreds of security tests that are non-intrusive to comprehensively and completely test for authentication, authorizations, and OWASP bugs your API. The tests address[...]
 
 # 2. Reporting.
 # EthicalCheck generates security test report that includes all the tested endpoints, coverage graph, exceptions, and vulnerabilities.
@@ -45,6 +45,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ethicalcheck
+  cancel-in-progress: false
+
 jobs:
   Trigger_EthicalCheck:
     permissions:
@@ -66,4 +70,3 @@ jobs:
          uses: github/codeql-action/upload-sarif@v3
          with:
           sarif_file: ./ethicalcheck-results.sarif
-
